@@ -246,14 +246,14 @@ class OptimizationSolver:
                                     hyperparameters)
         run_cfg = self._get_run_config(backend)
         run_condition = self._get_run_condition(timeout)
-        self.solver_process._log_config.level = 40
+        #self.solver_process._log_config.level = 40
 
         from lava.utils.profiler import Profiler
         self._profiler = Profiler.init(run_cfg)
         self._profiler.execution_time_probe(t_start=1,
-                                            t_end=timeout - 1,
-                                            dt=30,
-                                            buffer_size=1024)
+                                            t_end=timeout,
+                                            #dt=30,
+                                            buffer_size=24)
 
         self.solver_process.run(condition=run_condition, run_cfg=run_cfg)
         time_to_solution = float(np.sum(self._profiler.execution_time))
